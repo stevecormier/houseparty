@@ -5,12 +5,31 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 //  
 
-var API_KEY = AI39si4Qo7kp3ICZjnjyG-sBaYGK7ALSNGIPCHIu1vnLOwxMGUqaQ9s30YkR8tEXXIULk5f0j0VARxCPpib87Vy_b4rzfD0SVQ;
 
-$(".loadSong :button").click(function() {
+$("#searchbox .search").click(function(){
+
+	var query = $(this).siblings(':text').attr('value');
+
+	$("#results").empty();
+	$("#search").addClass("open");
+	$(".close").show();
+
+	searchYT(query);
+});
+
+$("#searchbox .close").click(function(){
+
+	$("#search").removeClass("open");
+	$(this).hide();
+
+});
+
+$(".loadSong :button").live('click', function() {
 	var ytURL = $(this).siblings(':text').attr('value');
 
 	var videoID = getVideoID(ytURL);
+
+	console.log(videoID);
 
 	if(this.name === "1"){
 		cueVideo(player1, videoID);
@@ -72,7 +91,6 @@ function onYouTubeIframeAPIReady() {
 		width: '640',
 		videoId: 'null',
 		playerVars: {
-			controls: 0,
 			disablekb: 1,
 			iv_load_policy: 3,
 			modestbranding: 1,
@@ -86,11 +104,10 @@ function onYouTubeIframeAPIReady() {
 		width: '640',
 		videoId: 'null',
 		playerVars: {
-			controls: 0,
 			disablekb: 1,
 			iv_load_policy: 3,
 			modestbranding: 1,
-			showinfo: 0,
+			showinfo: 0,	
 			rel: 0
 		}
 	});
@@ -111,4 +128,43 @@ function getVideoID(ytURL){
 	} else { 
 		return "invalid url";
 	}
+}
+
+function searchYT(query){
+	var baseURL = "https://gdata.youtube.com/feeds/api/videos";
+	var url = baseURL + "?q=" + query + "&alt=json";
+
+	var results = [];
+
+	$.getJSON(url, function(data){
+		$(data.feed.entry).each(function(index){
+			results[index] = {
+				url: this.link[0].href,
+				title: this.title.$t,
+				thumb: this.media$group.media$thumbnail[0].url
+			}
+		});
+
+		displayResults(results);
+	});
+}
+
+function displayResults(results){
+	$(results).each(function(index){
+
+		$("#results").append("<li class = 'result'> " +
+						 	  	"<img src = " + results[index].thumb + "> " + 
+						 	  	results[index].title + 
+						 	  	"<form class = 'loadSong'>" +
+						 	  		"<input type = 'text' hidden = 'true' value = '" + results[index].url + "' >" +
+						 	  		"<input type = 'button' value = 'load 1' name = '1'>" + 
+						 	  	"</form>" + 
+						 	  	"<form class = 'loadSong'>" + 
+						 	  		"<input type = 'text' hidden = 'true' value = '" + results[index].url + "' >" + 
+						 	  		"<input type = 'button' value = 'load 2' name = '2'>" + 
+						 	  	"</form>" +
+						 	 "</li>"
+		);
+
+	});
 }
