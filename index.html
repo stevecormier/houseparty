@@ -12,34 +12,34 @@
 			<h1>house/<strong>party</strong></h1>
 
 			<div id = "deck1" class = "deck">
+
+				<div id="player1" class = "player"></div>
+
 				<form class = "loadSong">
 					<input type = "text">
-					<input type = "button" value = "load" name = "1">
+					<input type = "button" value = "Load URL" name = "1">
 				</form>
-
-				<div id="player1"></div>
 
 			</div>
 
 			<div id = "deck2" class = "deck">
+
+				<div id="player2" class = "player"></div>
+
 				<form class = "loadSong">
 					<input type = "text">
-					<input type = "button" value = "load" name = "2">
+					<input type = "button" value = "Load URL" name = "2">
 				</form>
-
-				<div id="player2"></div>
 
 			</div>
 
 			<div id = "mixer">
 				<form id = "mixer">
 					<input class = "play" type = "button" value = "Play" name = "1">
-					<input class = "pause" type = "button" value = "Pause" name = "1">
 
 					<input type = "range" id = "fader" min = "0" max = "200" steps = "20" value = "100">
 
 					<input class = "play" type = "button" value = "Play" name = "2">
-					<input class = "pause" type = "button" value = "Pause" name = "2">
 				</form>
 
 			</div>
@@ -50,8 +50,8 @@
 
 			<form id = "searchbox">
 				<input type = "text"> 
-				<input class = "search" type = "button" value = "search">
-				<input class = "close" type = "button" value = "close">
+				<input class = "search" type = "button" value = "Search">
+				<input class = "close" type = "button" value = "Close">
 			</form>
 
 			<ul id = "results"></ui>
@@ -59,7 +59,9 @@
 		</div>
 
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src = "./js/jquery.fitvids.js"></script>
 		<script type="text/javascript" src = "./js/index.js"></script>
+
 
 	</body>
 
