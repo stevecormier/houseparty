@@ -1,9 +1,24 @@
+@font-face {
+    font-family: 'aleolight';
+    src: url('../fonts/aleo-light-webfont.eot');
+    src: url('../fonts/aleo-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/aleo-light-webfont.woff') format('woff'),
+         url('../fonts/aleo-light-webfont.ttf') format('truetype'),
+         url('../fonts/aleo-light-webfont.svg#aleolightitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 body{
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 }
 
 h1{
+	font-family: aleolight; 
 	font-weight: 500;
+	font-size: 40pt;
+	text-transform: uppercase;
 }
 
 input[type=button]{
@@ -50,14 +65,6 @@ input[type='text']{
 	height: 20px;
 	margin: 5px 10px 5px 10px;
 	width: 33%;
-}
-
-.deck{
-	background-color: grey;
-	display: inline-block;
-    width: 45%;
-    height: auto;
-    padding: 5px;
 }
 
 #mixer input[type=button]{
@@ -140,4 +147,20 @@ input[type='text']{
 	text-align: center;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+.seperator {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    border-top: 2px solid #333333;
+    margin:1.5em auto 0 auto;
+    width: 45%;
+}
+
+.deck{
+	background-color: grey;
+	display: inline-block;
+    width: 45%;
+    height: auto;
+    padding: 5px;
+    margin-top: 25px;
 }

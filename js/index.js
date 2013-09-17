@@ -7,18 +7,6 @@
 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 	//  
 
-	$(".loadSong :button").live('click', function() {
-		var ytURL = $(this).siblings(':text').attr('value');
-		var videoID = getVideoID(ytURL);
-
-		if(this.name === "1"){
-			cueVideo(player1, videoID);
-		} else {
-			cueVideo(player2, videoID);
-		}
-		
-	});
-
 	$("#fader").change(function() {
 
 		var level = $("#fader").attr("value");
@@ -42,7 +30,7 @@
 
 	});
 
-	$("#mixer .pause").live("click", function(){
+	$("#mixer .pause").on("click", function(){
 		
 		if(this.name === "1"){
 			player1.pauseVideo();
@@ -55,7 +43,7 @@
 
 	});
 
-	$("#mixer .play").live("click", function(){
+	$("#mixer .play").on("click", function(){
 
 		if(this.name === "1"){
 			player1.playVideo();
@@ -77,14 +65,48 @@
 
 	$("#searchbox .search").click(function(){
 
-		var query = $(this).siblings(':text').attr('value');
-
-		$("#results").empty();
-		$("#search").addClass("open");
-		$(".close").show();
-
-		searchYT(query);
+		searchYT();
 	});
+
+	$("#searchbox :text").keydown(function(event){
+
+ 		if(event.keyCode == 13){
+
+ 			event.preventDefault();
+			searchYT();
+ 		
+		}
+ 	});
+
+	$(".loadSong :button").on('click', function() {
+		var ytURL = $(this).siblings(':text').attr('value');
+		var videoID = getVideoID(ytURL);
+
+		if(this.name === "1"){
+			cueVideo(player1, videoID);
+		} else {
+			cueVideo(player2, videoID);
+		}
+		
+	});
+
+	$(".loadSong :text").on('keydown', function(event){
+
+ 		if(event.keyCode == 13){
+
+ 			event.preventDefault();
+
+			var ytURL = $(this).attr('value');
+			var videoID = getVideoID(ytURL);
+
+			if(this.name === "1"){
+				cueVideo(player1, videoID);
+			} else {
+				cueVideo(player2, videoID);
+			}
+ 		
+		}
+ 	});
 
 	function cueVideo(player, videoID){
 
@@ -148,11 +170,16 @@
 		$(".deck").fitVids();
 	}
 
-	function searchYT(query){
+	function searchYT(){
+
+		var query = $("#searchbox").attr('value');
 		var baseURL = "https://gdata.youtube.com/feeds/api/videos";
 		var url = baseURL + "?q=" + query + "&alt=json";
-
 		var results = [];
+
+		$("#results").empty();
+		$("#search").addClass("open");
+		$(".close").show();
 
 		$.getJSON(url, function(data){
 
