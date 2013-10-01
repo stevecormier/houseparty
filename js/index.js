@@ -9,7 +9,7 @@
 
 	$("#fader").change(function() {
 
-		var level = $("#fader").attr("value");
+		var level = $("#fader").val();
 
 		if(level > 100){
 
@@ -107,6 +107,13 @@
  		
 		}
  	});
+
+ 	$("#controls :button").on('click', function() {
+ 			
+ 		$("#fader").val($(this).attr('name')); 
+ 		$("#fader").trigger("change");
+		
+	});
 
 	function cueVideo(player, videoID){
 

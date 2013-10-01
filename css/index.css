@@ -34,8 +34,8 @@ input[type=button]{
   	-webkit-box-shadow: inset 0 -5px 0 #BE4C1A;
   	box-shadow:         inset 0 -5px 0 #BE4C1A;
 
-  	-webkit-border-radius: 3px;
-  	-moz-border-radius: 3px;
+  	-webkit-border-radius: 5px;
+  	-moz-border-radius: 5px;
   	border-radius: 3px;
   	
 }
@@ -50,13 +50,21 @@ input[type='range'] {
     background-color: gray;  
     margin-top: 30px;
     width: 30%;
-    height: 20px;
+    height: 15px;
+}  
+
+input[type='range'] {  
+    -webkit-appearance: none;  
+    background-color: gray;  
+    margin-top: 30px;
+    width: 30%;
+    height: 15px;
 }  
   
 input[type='range']::-webkit-slider-thumb {  
     -webkit-appearance: none;  
     background-color: #444;  
-    width: 30px;  
+    width: 15px;  
     height: 50px;  
 }
 
